@@ -1,20 +1,50 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import { NavigationContainer } from '@react-navigation/native'
+import React from 'react'
+import { PaperProvider } from 'react-native-paper'
+import { Ionicons } from '@expo/vector-icons'
+
+import HomeScreen from './screens/HomeScreen.jsx'
+import CadastroScreen from './screens/CadastroScreen.jsx'
+
+
+const Tab = createBottomTabNavigator()
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <PaperProvider>
+      <NavigationContainer>
+        <Tab.Navigator>
+          <Tab.Screen
+            name='HomeScreen'
+            component={HomeScreen}
+            options={{
+              title: 'AppFood',
+              headerTitleAlign: 'center',
+              headerTintColor: 'white',
+              headerStyle: {
+                backgroundColor: 'red',
+              },
+              tabBarIcon: ({ color, size }) => <Ionicons name='restaurant' color={color} size={size} />
+            }}
+          />
+          <Tab.Screen
+            name='CadastroScreen'
+            component={CadastroScreen}
+            options={{
+              title: 'Cadastro',
+              headerTitleAlign: 'center',
+              headerTintColor: 'white',
+              headerStyle: {
+                backgroundColor: 'red',
+              },
+              tabBarIcon: ({ color, size }) => <Ionicons name='person-add' color={color} size={size} />
+            }}
+          />
+
+
+        </Tab.Navigator>
+      </NavigationContainer>
+    </PaperProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
